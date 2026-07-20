@@ -1,0 +1,40 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# Streamlit local state
+.streamlit/
+
+# IDE/editor files
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Package artifacts
+*.egg-info/
+*.dist-info/
+*.tar.gz
+*.whl
+
+# Data and model artifacts
+*.csv
+*.pkl
+
+# Docker artifacts
+docker-compose.override.yml
+
+# Logs
+*.log
