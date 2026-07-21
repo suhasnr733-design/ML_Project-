@@ -2,6 +2,10 @@
 
 A Streamlit app for estimating house prices in Bangalore using a trained Random Forest model.
 
+**Live Demo**: [Open app on Streamlit Community Cloud](https://share.streamlit.io/suhasnr733-design/ML_Project-/main/app.py)
+
+Badge: [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/suhasnr733-design/ML_Project-/main/app.py)
+
 ## Files
 
 - `app.py` - main Streamlit application

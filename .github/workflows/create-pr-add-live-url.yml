@@ -1,0 +1,47 @@
+name: Create PR to add Streamlit live URL
+
+on:
+  workflow_dispatch:
+    inputs:
+      streamlit_url:
+        description: 'Streamlit deployment URL (e.g., https://share.streamlit.io/owner/repo/branch/app.py)'
+        required: true
+
+jobs:
+  add-live-url:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Replace placeholder URLs
+        run: |
+          echo "Replacing README and DEPLOY.md placeholders with provided URL"
+          URL="${{ github.event.inputs.streamlit_url }}"
+          # Replace the example URL used earlier with provided URL
+          sed -i "s|https://share.streamlit.io/suhasnr733-design/ML_Project-/main/app.py|${URL}|g" README.md || true
+          sed -i "s|https://share.streamlit.io/suhasnr733-design/ML_Project-/main/app.py|${URL}|g" DEPLOY.md || true
+
+      - name: Create branch, commit and push
+        run: |
+          BRANCH=add-streamlit-url-${{ github.run_number }}
+          git checkout -b $BRANCH
+          git add README.md DEPLOY.md || true
+          git commit -m "chore: add Streamlit live URL" || echo "No changes to commit"
+          git push --set-upstream origin $BRANCH
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: chore: add Streamlit live URL
+          branch: add-streamlit-url-${{ github.run_number }}
+          title: Add Streamlit live demo URL
+          body: |
+            This PR updates the README and DEPLOY.md to include the Streamlit live deployment URL provided when triggering this workflow.
+          base: main
