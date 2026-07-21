@@ -4,7 +4,11 @@ import pickle
 import time
 import json
 import streamlit as st
-from streamlit_lottie import st_lottie
+
+try:
+    from streamlit_lottie import st_lottie
+except Exception:  # pragma: no cover - graceful fallback for deployment environments
+    st_lottie = None
 
 
 st.set_page_config(page_title="Bengaluru House Price Predictor", page_icon="icons/house_logo.png", layout="wide")
@@ -57,7 +61,13 @@ if selection == 'Home':
     left, right = st.columns([1, 1])
     with left:
         anime = load_house_anime()
-        st_lottie(anime, width=340)
+        if st_lottie is not None:
+            try:
+                st_lottie(anime, width=340)
+            except Exception:
+                st.info("Animation preview is unavailable right now.")
+        else:
+            st.info("Animation preview is unavailable right now.")
     with right:
         st.markdown("""
         ##### 🏠 Welcome to the Bangalore House Price Predictor
