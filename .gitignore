@@ -29,9 +29,10 @@ Thumbs.db
 *.tar.gz
 *.whl
 
-# Data and model artifacts
-*.csv
-*.pkl
+# Keep app data and model files tracked
+!Bengaluru_House_Data.csv
+!cleaned_df.csv
+!RFmodel.pkl
 
 # Docker artifacts
 docker-compose.override.yml
